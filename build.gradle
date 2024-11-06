@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'maven-publish'
 }
 
 group = 'me.xentany'
@@ -23,7 +24,6 @@ repositories {
 }
 
 dependencies {
-    //noinspection VulnerableLibrariesLocal
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     implementation 'com.zaxxer:HikariCP:6.0.0'
     implementation 'org.jdbi:jdbi3-core:3.47.0'
@@ -68,4 +68,16 @@ shadowJar {
     relocate 'com.zaxxer', 'me.xentany.libs.hikari'
     relocate 'org.jdbi', 'me.xentany.libs.jdbi'
     relocate 'net.elytrium.commons', 'me.xentany.libs.elytrium'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact(tasks.named("shadowJar").get().archiveFile.get().asFile) {
+                classifier = null
+            }
+        }
+    }
 }
