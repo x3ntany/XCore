@@ -69,3 +69,18 @@ shadowJar {
     relocate 'org.jdbi', 'me.xentany.libs.jdbi'
     relocate 'net.elytrium.commons', 'me.xentany.libs.elytrium'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact shadowJar
+            artifactId = 'XCore'
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
+}
