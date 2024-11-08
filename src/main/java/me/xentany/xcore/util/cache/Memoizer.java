@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-public final class Memoizer<T, R> {
+public final class Memoizer<K, V> {
 
-  private final Map<T, R> cache = new ConcurrentHashMap<>();
+  private final Map<K, V> cache = new ConcurrentHashMap<>();
 
   @Contract(pure = true)
-  public @NotNull Function<T, R> memoize(final Function<T, R> function) {
+  public @NotNull Function<K, V> memoize(final @NotNull Function<K, V> function) {
     return input -> this.cache.computeIfAbsent(input, function);
   }
 }
