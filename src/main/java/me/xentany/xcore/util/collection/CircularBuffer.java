@@ -1,5 +1,10 @@
 package me.xentany.xcore.util.collection;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.stream.IntStream;
+
 public final class CircularBuffer<T> {
 
   private final Object[] buffer;
@@ -29,5 +34,25 @@ public final class CircularBuffer<T> {
     }
 
     return (T) this.buffer[(this.head + index) % this.buffer.length];
+  }
+
+  @Contract(pure = true)
+  @Override
+  public @NotNull String toString() {
+    var builder = new StringBuilder();
+
+    builder.append("CircularBuffer[");
+
+    IntStream.range(0, this.count).forEach(i -> {
+      builder.append(this.get(i));
+
+      if (i < this.count - 1) {
+        builder.append(", ");
+      }
+    });
+
+    builder.append("]");
+
+    return builder.toString();
   }
 }
