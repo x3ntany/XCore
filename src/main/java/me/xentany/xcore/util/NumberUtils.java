@@ -127,7 +127,9 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Byte toByte(final @NotNull String value) {
     try {
-      var stringNumber = value.trim().replaceAll("[^0-9.-]", "").replaceAll("(\\.)(?=.*\\.)", "");
+      var stringNumber = value.trim()
+          .replaceAll("[^0-9.-]", "")
+          .replaceAll("(\\.)(?=.*\\.)", "");
       var doubleValue = Double.parseDouble(stringNumber);
       return (doubleValue < Byte.MIN_VALUE || doubleValue > Byte.MAX_VALUE) ? null : (byte) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
