@@ -38,4 +38,16 @@ public final class Either<L, R> {
   public R getRight() {
     return this.right;
   }
+
+  @Contract(pure = true)
+  @Override
+  public @NotNull String toString() {
+    if (this.isLeft()) {
+      return "Either[left=" + this.left + "]";
+    } else if (this.isRight()) {
+      return "Either[right=" + this.right + "]";
+    } else {
+      return "Either[empty]";
+    }
+  }
 }
