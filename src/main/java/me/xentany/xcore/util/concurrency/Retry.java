@@ -1,5 +1,10 @@
 package me.xentany.xcore.util.concurrency;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 public final class Retry<T> {
 
   private final int attempts;
@@ -10,7 +15,7 @@ public final class Retry<T> {
     this.delay = delay;
   }
 
-  public T execute(final CheckedSupplier<T> task) throws Exception {
+  public T execute(final @NotNull CheckedSupplier<T> task) throws Exception {
     for (int i = 0; i < this.attempts; i++) {
       try {
         return task.get();
@@ -19,7 +24,15 @@ public final class Retry<T> {
           throw e;
         }
 
-        Thread.sleep(this.delay);
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+          try {
+            TimeUnit.MILLISECONDS.sleep(this.delay);
+          } catch (InterruptedException ignoredE) {
+            Thread.currentThread().interrupt();
+          }
+        });
+
+        future.join();
       }
     }
 
