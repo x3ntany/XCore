@@ -2,14 +2,6 @@ package me.xentany.xcore.util;
 
 public final class MathUtils {
 
-  public static double toRadians(final double degrees) {
-    return degrees * Math.PI / 180.0;
-  }
-
-  public static double toDegrees(final double radians) {
-    return radians * 180.0 / Math.PI;
-  }
-
   public static double normalizeAngle(final double angle) {
     var normalizedAngle = angle % 360;
 
