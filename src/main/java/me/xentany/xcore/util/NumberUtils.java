@@ -65,10 +65,11 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Integer toInteger(final @NotNull String value) {
     try {
-      return Integer.parseInt(value
+      var stringNumber = value.trim()
           .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
-      );
+          .replaceAll("(\\.)(?=.*\\.)", "");
+      var doubleValue = Double.parseDouble(stringNumber);
+      return doubleValue < Integer.MIN_VALUE || doubleValue > Integer.MAX_VALUE ? null : (int) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
       return null;
     }
@@ -77,9 +78,9 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Long toLong(final @NotNull String value) {
     try {
-      return Long.parseLong(value
+      return MathUtils.round(Double.parseDouble(value.trim()
           .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
+          .replaceAll("(\\.)(?=.*\\.)", ""))
       );
     } catch (final NumberFormatException e) {
       return null;
@@ -89,9 +90,9 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Double toDouble(final @NotNull String value) {
     try {
-      return Double.parseDouble(value
+      return Double.parseDouble(value.trim()
           .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
+          .replaceAll("(\\.)(?=.*\\.)", "")
       );
     } catch (final NumberFormatException e) {
       return null;
@@ -101,9 +102,9 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Float toFloat(final @NotNull String value) {
     try {
-      return Float.parseFloat(value
+      return Float.parseFloat(value.trim()
           .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
+          .replaceAll("(\\.)(?=.*\\.)", "")
       );
     } catch (final NumberFormatException e) {
       return null;
@@ -113,10 +114,11 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Short toShort(final @NotNull String value) {
     try {
-      return Short.parseShort(value
+      var stringNumber = value.trim()
           .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
-      );
+          .replaceAll("(\\.)(?=.*\\.)", "");
+      var doubleValue = Double.parseDouble(stringNumber);
+      return (doubleValue < Short.MIN_VALUE || doubleValue > Short.MAX_VALUE) ? null : (short) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
       return null;
     }
@@ -125,10 +127,9 @@ public final class NumberUtils {
   @Contract(pure = true)
   public static @Nullable Byte toByte(final @NotNull String value) {
     try {
-      return Byte.parseByte(value
-          .replaceAll("[^0-9.-]", "")
-          .replaceAll("\\s+", "")
-      );
+      var stringNumber = value.trim().replaceAll("[^0-9.-]", "").replaceAll("(\\.)(?=.*\\.)", "");
+      var doubleValue = Double.parseDouble(stringNumber);
+      return (doubleValue < Byte.MIN_VALUE || doubleValue > Byte.MAX_VALUE) ? null : (byte) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
       return null;
     }
