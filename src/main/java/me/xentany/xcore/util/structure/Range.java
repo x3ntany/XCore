@@ -18,6 +18,6 @@ public record Range<T extends Comparable<T>>(T start, T end) {
   @Contract(pure = true)
   @Override
   public @NotNull String toString() {
-    return "Range{" + "start=" + start + ", end=" + end + '}';
+    return "Range{" + "start=" + this.start + ", end=" + this.end + '}';
   }
 }

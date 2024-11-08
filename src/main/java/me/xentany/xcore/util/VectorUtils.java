@@ -55,13 +55,12 @@ public final class VectorUtils {
   public static boolean isInside(final @NotNull Vector point,
                                  final @NotNull Vector minimum,
                                  final @NotNull Vector maximum) {
-    double minX = Math.min(minimum.getX(), maximum.getX());
-    double maxX = Math.max(minimum.getX(), maximum.getX());
-    double minY = Math.min(minimum.getY(), maximum.getY());
-    double maxY = Math.max(minimum.getY(), maximum.getY());
-    double minZ = Math.min(minimum.getZ(), maximum.getZ());
-    double maxZ = Math.max(minimum.getZ(), maximum.getZ());
-
+    var minX = Math.min(minimum.getX(), maximum.getX());
+    var maxX = Math.max(minimum.getX(), maximum.getX());
+    var minY = Math.min(minimum.getY(), maximum.getY());
+    var maxY = Math.max(minimum.getY(), maximum.getY());
+    var minZ = Math.min(minimum.getZ(), maximum.getZ());
+    var maxZ = Math.max(minimum.getZ(), maximum.getZ());
     return MathUtils.isInRange(point.getX(), minX, maxX) &&
         MathUtils.isInRange(point.getY(), minY, maxY) &&
         MathUtils.isInRange(point.getZ(), minZ, maxZ);

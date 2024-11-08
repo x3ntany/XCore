@@ -7,12 +7,6 @@ import java.util.Objects;
 
 public record Pair<A, B>(A first, B second) {
 
-  @Contract(pure = true)
-  @Override
-  public @NotNull String toString() {
-    return "Pair{" + "first=" + first + ", second=" + second + '}';
-  }
-
   @Override
   public boolean equals(final Object object) {
     if (this == object) {
@@ -24,5 +18,11 @@ public record Pair<A, B>(A first, B second) {
     }
 
     return Objects.equals(this.first, pair.first) && Objects.equals(this.second, pair.second);
+  }
+
+  @Contract(pure = true)
+  @Override
+  public @NotNull String toString() {
+    return "Pair{" + "first=" + this.first + ", second=" + this.second + '}';
   }
 }
