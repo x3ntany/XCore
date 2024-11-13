@@ -63,7 +63,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Integer toInteger(final @NotNull String value) {
+  public static @Nullable Integer toInteger(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       var stringNumber = value.trim()
           .replaceAll("[^0-9.-]", "")
@@ -76,7 +80,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Long toLong(final @NotNull String value) {
+  public static @Nullable Long toLong(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       return MathUtils.round(Double.parseDouble(value.trim()
           .replaceAll("[^0-9.-]", "")
@@ -88,7 +96,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Double toDouble(final @NotNull String value) {
+  public static @Nullable Double toDouble(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       return Double.parseDouble(value.trim()
           .replaceAll("[^0-9.-]", "")
@@ -100,7 +112,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Float toFloat(final @NotNull String value) {
+  public static @Nullable Float toFloat(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       return Float.parseFloat(value.trim()
           .replaceAll("[^0-9.-]", "")
@@ -112,7 +128,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Short toShort(final @NotNull String value) {
+  public static @Nullable Short toShort(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       var stringNumber = value.trim()
           .replaceAll("[^0-9.-]", "")
@@ -125,7 +145,11 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Byte toByte(final @NotNull String value) {
+  public static @Nullable Byte toByte(final @Nullable String value) {
+    if (value == null) {
+      return null;
+    }
+
     try {
       var stringNumber = value.trim()
           .replaceAll("[^0-9.-]", "")
