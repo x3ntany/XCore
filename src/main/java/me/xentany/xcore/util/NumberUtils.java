@@ -63,9 +63,9 @@ public final class NumberUtils {
   }
 
   @Contract(pure = true)
-  public static @Nullable Integer toInteger(final @Nullable String value) {
+  public static int toInt(final @Nullable String value, final int defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -75,14 +75,14 @@ public final class NumberUtils {
       var doubleValue = Double.parseDouble(stringNumber);
       return doubleValue < Integer.MIN_VALUE || doubleValue > Integer.MAX_VALUE ? null : (int) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
     }
   }
 
   @Contract(pure = true)
-  public static @Nullable Long toLong(final @Nullable String value) {
+  public static long toLong(final @Nullable String value, final long defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -91,14 +91,14 @@ public final class NumberUtils {
           .replaceAll("(\\.)(?=.*\\.)", ""))
       );
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
     }
   }
 
   @Contract(pure = true)
-  public static @Nullable Double toDouble(final @Nullable String value) {
+  public static @NotNull Double toDouble(final @Nullable String value, final double defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -107,14 +107,14 @@ public final class NumberUtils {
           .replaceAll("(\\.)(?=.*\\.)", "")
       );
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
     }
   }
 
   @Contract(pure = true)
-  public static @Nullable Float toFloat(final @Nullable String value) {
+  public static @NotNull Float toFloat(final @Nullable String value, final float defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -123,14 +123,14 @@ public final class NumberUtils {
           .replaceAll("(\\.)(?=.*\\.)", "")
       );
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
     }
   }
 
   @Contract(pure = true)
-  public static @Nullable Short toShort(final @Nullable String value) {
+  public static short toShort(final @Nullable String value, final short defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -140,14 +140,14 @@ public final class NumberUtils {
       var doubleValue = Double.parseDouble(stringNumber);
       return (doubleValue < Short.MIN_VALUE || doubleValue > Short.MAX_VALUE) ? null : (short) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
     }
   }
 
   @Contract(pure = true)
-  public static @Nullable Byte toByte(final @Nullable String value) {
+  public static byte toByte(final @Nullable String value, final byte defaultValue) {
     if (value == null) {
-      return null;
+      return defaultValue;
     }
 
     try {
@@ -157,7 +157,61 @@ public final class NumberUtils {
       var doubleValue = Double.parseDouble(stringNumber);
       return (doubleValue < Byte.MIN_VALUE || doubleValue > Byte.MAX_VALUE) ? null : (byte) MathUtils.round(doubleValue);
     } catch (final NumberFormatException e) {
-      return null;
+      return defaultValue;
+    }
+  }
+
+  @Contract(pure = true)
+  public static int toInt(final @Nullable String[] values, final int index, final int defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toInt(values[index], defaultValue);
+    }
+  }
+
+  @Contract(pure = true)
+  public static long toLong(final @Nullable String[] values, final int index, final long defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toLong(values[index], defaultValue);
+    }
+  }
+
+  @Contract(pure = true)
+  public static @NotNull Double toDouble(final @Nullable String[] values, final int index, final double defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toDouble(values[index], defaultValue);
+    }
+  }
+
+  @Contract(pure = true)
+  public static @NotNull Float toFloat(final @Nullable String[] values, final int index, final float defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toFloat(values[index], defaultValue);
+    }
+  }
+
+  @Contract(pure = true)
+  public static short toShort(final @Nullable String[] values, final int index, final short defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toShort(values[index], defaultValue);
+    }
+  }
+
+  @Contract(pure = true)
+  public static byte toByte(final @Nullable String[] values, final int index, final byte defaultValue) {
+    if (values == null || index < 0 || index >= values.length) {
+      return defaultValue;
+    } else {
+      return NumberUtils.toByte(values[index], defaultValue);
     }
   }
 }
