@@ -28,6 +28,7 @@ dependencies {
   compileOnly("net.kyori:adventure-text-serializer-legacy:4.20.0")
   compileOnly("net.kyori:adventure-text-serializer-json:4.20.0")
   compileOnly("net.kyori:adventure-api:4.20.0")
+  compileOnly("net.luckperms:api:5.4")
   implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
   testImplementation("junit:junit:4.13.1")
   testImplementation(platform("org.junit:junit-bom:5.10.0"))
