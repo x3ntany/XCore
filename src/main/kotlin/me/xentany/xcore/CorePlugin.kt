@@ -8,7 +8,7 @@ internal class CorePlugin : JavaPlugin() {
   override fun onEnable() {
     this.slF4JLogger.info(
       TextSerializerVault.get(this).toStringMiniMessage(
-        "<green>XCore version {version} successfully launched", mapOf("version" to description.version)
+        "<green>XCore version ${description.version} successfully launched"
       )
     )
   }

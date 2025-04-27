@@ -1,6 +1,5 @@
 package me.xentany.xcore.util.text.serializer
 
-import me.xentany.xcore.util.text.TextFormatter
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.concurrent.ConcurrentHashMap
 
@@ -14,9 +13,7 @@ object TextSerializerVault {
 
     return this.map.computeIfAbsent(plugin) {
       println(
-        TextFormatter.format(
-          "[XCore#TextSerializerVault] New instance created for plugin: {plugin}", mapOf("plugin" to plugin.name)
-        )
+        "[XCore#TextSerializerVault] New instance created for plugin: ${plugin.name}"
       )
 
       TextSerializer()
