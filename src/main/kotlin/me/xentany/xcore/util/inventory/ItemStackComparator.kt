@@ -108,6 +108,7 @@ class ItemStackComparator {
     if (firstItemMeta == null && secondItemMeta == null) {
       return true
     }
+
     if (firstItemMeta == null || secondItemMeta == null) {
       return false
     }
