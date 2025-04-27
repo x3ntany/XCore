@@ -1,0 +1,6 @@
+name: XCore
+version: ${project.version}
+main: me.xentany.xcore.CorePlugin
+load: STARTUP
+api-version: '1.16'
+author: x3ntany
