@@ -16,34 +16,28 @@ class ItemStackComparator {
   private var damagePercentTolerance = 0.0
 
   fun checks(): Checks {
-    return Checks(this)
+    return Checks()
   }
 
-  class Checks(private val parent: ItemStackComparator) {
+  inner class Checks {
 
-    fun name(): Checks {
-      this.parent.checkName = true
-      return this
+    fun name() = apply {
+      checkName = true
     }
 
-    fun lore(): Checks {
-      this.parent.checkLore = true
-      return this
+    fun lore() = apply {
+      checkLore = true
     }
 
-    fun amount(): Checks {
-      this.parent.checkAmount = true
-      return this
+    fun amount() = apply {
+      checkAmount = true
     }
 
-    fun damage(): Checks {
-      this.parent.checkDamage = true
-      return this
+    fun damage() = apply {
+      checkDamage = true
     }
 
-    fun and(): ItemStackComparator {
-      return this.parent
-    }
+    fun and() = this@ItemStackComparator
   }
 
   fun withDamageTolerance(tolerance: Int): ItemStackComparator {
