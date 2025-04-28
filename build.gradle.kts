@@ -15,6 +15,7 @@ repositories {
   maven("https://repo.papermc.io/repository/maven-public/")
   maven("https://oss.sonatype.org/content/groups/public/")
   maven("https://repo.phoenix616.dev/")
+  maven("https://repo.rosewooddev.io/repository/public/")
 }
 
 dependencies {
@@ -29,6 +30,8 @@ dependencies {
   compileOnly("net.kyori:adventure-text-serializer-json:4.20.0")
   compileOnly("net.kyori:adventure-api:4.20.0")
   compileOnly("net.luckperms:api:5.4")
+  compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+  compileOnly("org.black_ixx:playerpoints:3.3.2")
   implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
   testImplementation("junit:junit:4.13.1")
   testImplementation(platform("org.junit:junit-bom:5.10.0"))

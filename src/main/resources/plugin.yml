@@ -6,3 +6,5 @@ api-version: '1.16'
 author: x3ntany
 softdepend:
   - LuckPerms
+  - PlayerPoints
+  - Vault
