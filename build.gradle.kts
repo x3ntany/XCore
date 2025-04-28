@@ -33,6 +33,7 @@ dependencies {
   compileOnly("com.github.MilkBowl:VaultAPI:1.7")
   compileOnly("org.black_ixx:playerpoints:3.3.2")
   implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
+  implementation("com.zaxxer:HikariCP:6.3.0")
   testImplementation("junit:junit:4.13.1")
   testImplementation(platform("org.junit:junit-bom:5.10.0"))
   testImplementation("org.junit.jupiter:junit-jupiter")
