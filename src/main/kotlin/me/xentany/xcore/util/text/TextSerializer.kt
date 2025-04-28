@@ -1,14 +1,15 @@
-package me.xentany.xcore.util.text.serializer
+package me.xentany.xcore.util.text
 
-import me.xentany.xcore.util.text.TextFormatter
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+import org.bukkit.plugin.java.JavaPlugin
+import java.util.concurrent.ConcurrentHashMap
 
 class TextSerializer(
-  var miniMessage: MiniMessage = fetchMiniMessageInstance(),
+  var miniMessage: MiniMessage = this.fetchMiniMessageInstance(),
   var legacy: LegacyComponentSerializer = LegacyComponentSerializer.legacySection(),
   val plain: PlainTextComponentSerializer = PlainTextComponentSerializer.plainText(),
   var gson: GsonComponentSerializer = GsonComponentSerializer.builder().downsampleColors().build()
@@ -51,7 +52,23 @@ class TextSerializer(
   fun toStringMiniMessage(string: String, values: Map<String, Any?> = emptyMap()): String =
     this.fromLegacy(this.toMiniMessage(string, values))
 
-  companion object {
+  internal companion object {
+
+    private val map = ConcurrentHashMap<JavaPlugin, TextSerializer>()
+
+    @JvmStatic
+    fun of(any: Any): TextSerializer {
+      val plugin = JavaPlugin.getProvidingPlugin(any.javaClass)
+
+      return this.map.computeIfAbsent(plugin) {
+        println("[XCore#TextSerializer] New instance created for plugin: ${plugin.name}")
+        TextSerializer()
+      }
+    }
+
+    internal fun clear() {
+      this.map.clear()
+    }
 
     private fun fetchMiniMessageInstance(): MiniMessage {
       return try {
