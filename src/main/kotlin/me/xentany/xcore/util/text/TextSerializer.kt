@@ -52,7 +52,7 @@ class TextSerializer(
   fun toStringMiniMessage(string: String, values: Map<String, Any?> = emptyMap()): String =
     this.fromLegacy(this.toMiniMessage(string, values))
 
-  internal companion object {
+  companion object {
 
     private val map = ConcurrentHashMap<JavaPlugin, TextSerializer>()
 
