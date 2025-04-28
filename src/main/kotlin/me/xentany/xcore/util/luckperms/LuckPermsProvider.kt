@@ -10,29 +10,25 @@ object LuckPermsProvider {
   @Volatile
   private var _instance: LuckPerms? = null
 
-  fun get(): LuckPerms? {
-    return _instance
-  }
+  fun get(): LuckPerms? = this._instance
 
   @JvmStatic
-  fun optional(): Optional<LuckPerms> {
-    return Optional.ofNullable(_instance)
-  }
+  fun optional(): Optional<LuckPerms> = Optional.ofNullable(this._instance)
 
   internal fun hook(plugin: Plugin): Boolean {
     val provider = Bukkit.getServicesManager().getRegistration(LuckPerms::class.java)?.provider
 
-    _instance = provider
+    this._instance = provider
 
-    if (provider != null) {
+    return if (provider != null) {
       plugin.slF4JLogger.info("LuckPerms detected and hooked")
-      return true
+      true
     } else {
-      return false
+      false
     }
   }
 
   internal fun unhook() {
-    _instance = null
+    this._instance = null
   }
 }

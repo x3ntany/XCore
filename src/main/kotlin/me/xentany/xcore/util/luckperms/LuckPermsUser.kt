@@ -14,7 +14,7 @@ class LuckPermsUser(
   val api: LuckPerms
 ) {
 
-  val uniqueId: UUID get() = this.user.uniqueId
+  val uniqueId: UUID = this.user.uniqueId
 
   fun hasPermission(node: String): Boolean =
     this.user.cachedData.permissionData.checkPermission(node).asBoolean()
@@ -40,9 +40,7 @@ class LuckPermsUser(
   fun getGroups(): Set<String> =
     this.user.nodes
       .filterIsInstance<InheritanceNode>()
-      .mapTo(mutableSetOf()) {
-        it.groupName
-      }
+      .mapTo(mutableSetOf()) { it.groupName }
 
   fun addGroup(group: String): Boolean {
     val inheritanceNode = InheritanceNode.builder(group).build()
@@ -71,27 +69,21 @@ class LuckPermsUser(
     return changed.wasSuccessful()
   }
 
-  fun getPrefix(): String? = user.cachedData.metaData.prefix
-
-  fun getSuffix(): String? = user.cachedData.metaData.suffix
-
-  fun getMeta(key: String): String? = user.cachedData.metaData.getMetaValue(key)
+  fun getPrefix(): String? = this.user.cachedData.metaData.prefix
+  fun getSuffix(): String? = this.user.cachedData.metaData.suffix
+  fun getMeta(key: String): String? = this.user.cachedData.metaData.getMetaValue(key)
 
   fun setMeta(key: String, value: String): Boolean {
     val metaNode = MetaNode.builder(key, value).build()
     val changed = this.user.data().add(metaNode)
-
     this.api.userManager.saveUser(this.user)
-
     return changed.wasSuccessful()
   }
 
   fun removeMeta(key: String): Boolean {
     val nodesToRemove = this.user.nodes
       .filterIsInstance<MetaNode>()
-      .filter {
-        it.metaKey == key
-      }
+      .filter { it.metaKey == key }
     var changed = false
 
     for (metaNode in nodesToRemove) {
@@ -111,17 +103,14 @@ class LuckPermsUser(
       val api = LuckPermsProvider.get() ?: return callback(null)
 
       api.userManager.loadUser(uuid).thenAccept { user ->
-        if (user == null) {
-          callback(null)
-        } else {
-          callback(LuckPermsUser(user, api))
-        }
+        callback(if (user == null) null else LuckPermsUser(user, api))
       }
     }
 
     fun getIfLoaded(uuid: UUID): LuckPermsUser? {
       val api = LuckPermsProvider.get() ?: return null
       val user = api.userManager.getUser(uuid) ?: return null
+
       return LuckPermsUser(user, api)
     }
 
