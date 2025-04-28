@@ -9,11 +9,7 @@ internal class CorePlugin : JavaPlugin() {
   override fun onEnable() {
     LuckPermsProvider.hook(this)
 
-    this.slF4JLogger.info(
-      TextSerializerVault.get(this).toStringMiniMessage(
-        "<green>XCore version ${description.version} successfully launched"
-      )
-    )
+    this.slF4JLogger.info("<green>XCore version ${description.version} successfully launched")
   }
 
   override fun onDisable() {
