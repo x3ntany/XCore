@@ -6,7 +6,6 @@ import org.black_ixx.playerpoints.PlayerPointsAPI
 import org.bukkit.Bukkit
 import org.bukkit.plugin.Plugin
 
-
 object PlayerPointsProvider : ServiceProvider<PlayerPointsAPI>(PlayerPointsAPI::class.java) {
 
   override fun hook(plugin: Plugin): Boolean {

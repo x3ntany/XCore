@@ -7,8 +7,7 @@ import net.luckperms.api.node.types.MetaNode
 import net.luckperms.api.node.types.PermissionNode
 import org.bukkit.OfflinePlayer
 import java.time.Duration
-import java.util.UUID
-import kotlin.text.get
+import java.util.*
 
 class LuckPermsUser(
   val user: User,
