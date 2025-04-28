@@ -76,7 +76,9 @@ class LuckPermsUser(
   fun setMeta(key: String, value: String): Boolean {
     val metaNode = MetaNode.builder(key, value).build()
     val changed = this.user.data().add(metaNode)
+
     this.api.userManager.saveUser(this.user)
+
     return changed.wasSuccessful()
   }
 
