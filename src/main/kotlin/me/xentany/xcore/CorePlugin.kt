@@ -15,9 +15,6 @@ internal class CorePlugin : JavaPlugin() {
   }
 
   override fun onDisable() {
-    LuckPermsProvider.unhook()
-    PlayerPointsProvider.unhook()
-    VaultEconomyProvider.unhook()
     TextSerializerVault.clear()
   }
 }

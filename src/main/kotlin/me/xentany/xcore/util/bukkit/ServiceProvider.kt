@@ -25,8 +25,4 @@ open class ServiceProvider<T : Any>(private val clazz: Class<T>) {
       false
     }
   }
-
-  open fun unhook() {
-    this._instance = null
-  }
 }
